@@ -1,31 +1,31 @@
-name: Java CI with Maven
+# name: Java CI with Maven
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    container:
-      image: 172.22.90.3:5679/build_maven:v12
-      volumes:
-        - pnpm-cache-volume:/root/.local/share/pnpm/store/v10
-    steps:
-      - name: 拉取代码
-        uses: https://gitee.com/hqqich/checkout@v4
-      - name: 设置store
-        run: mkdir -p /tmp/pnpm-store && echo "store=/tmp/pnpm-store" > ~/.npmrc
-      - name: 更新依赖
-        run: pnpm install --no-frozen-lockfile
-      - name: 打包
-        run: pnpm build:pro
-      - name: 替换90.3上的前端文件
-        run: sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -r -P 22 ./dist/* root@172.22.90.3:/opt/enwo/web/gfdz/frontend/
-      - name: 更新47平台
-        run: apt install -y zip && cd dist && zip -r dist.zip ./* && curl -X POST -F "file=@dist.zip" https://enwo.heqq.xyz:9007/deploy/formatData
-      - name: 推送消息到飞书
-        run: |
-          response=$(curl -X POST -H "Content-Type: application/json" -d '{"msg_type":"text","content":{"text":"工作流执行完成(47.101.43.104  90.3)(前端_替换完成)"}}' "https://open.feishu.cn/open-apis/bot/v2/hook/498722e2-d29c-4bad-9c86-804e5719734a")
-          echo "API Response: $response"
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     container:
+#       image: 172.22.90.3:5679/build_maven:v12
+#       volumes:
+#         - pnpm-cache-volume:/root/.local/share/pnpm/store/v10
+#     steps:
+#       - name: 拉取代码
+#         uses: https://gitee.com/hqqich/checkout@v4
+#       - name: 设置store
+#         run: mkdir -p /tmp/pnpm-store && echo "store=/tmp/pnpm-store" > ~/.npmrc
+#       - name: 更新依赖
+#         run: pnpm install --no-frozen-lockfile
+#       - name: 打包
+#         run: pnpm build:pro
+#       - name: 替换90.3上的前端文件
+#         run: sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -r -P 22 ./dist/* root@172.22.90.3:/opt/enwo/web/gfdz/frontend/
+#       - name: 更新47平台
+#         run: apt install -y zip && cd dist && zip -r dist.zip ./* && curl -X POST -F "file=@dist.zip" https://enwo.heqq.xyz:9007/deploy/formatData
+#       - name: 推送消息到飞书
+#         run: |
+#           response=$(curl -X POST -H "Content-Type: application/json" -d '{"msg_type":"text","content":{"text":"工作流执行完成(47.101.43.104  90.3)(前端_替换完成)"}}' "https://open.feishu.cn/open-apis/bot/v2/hook/498722e2-d29c-4bad-9c86-804e5719734a")
+#           echo "API Response: $response"
