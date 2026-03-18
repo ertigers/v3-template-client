@@ -1,0 +1,128 @@
+.filter {
+  box-sizing: border-box;
+  width: 400px;
+  min-width: 400px;
+  height: 100%;
+  padding: 18px;
+  margin-right: 10px;
+  .title {
+    margin: 0 0 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--el-color-info-dark-2);
+    letter-spacing: 0.5px;
+  }
+  .search {
+    display: flex;
+    align-items: center;
+    margin: 0 0 15px;
+    .el-icon {
+      cursor: pointer;
+      transform: rotate(90deg) translateY(-8px);
+    }
+  }
+  .el-scrollbar {
+    :deep(.el-tree) {
+      height: 100%;
+      overflow: auto;
+      .el-tree-node__content {
+        height: 33px;
+      }
+    }
+    :deep(.el-tree--highlight-current) {
+      .el-tree-node.is-current > .el-tree-node__content {
+        background-color: var(--el-color-primary);
+        .el-tree-node__label,
+        .el-tree-node__expand-icon {
+          color: white;
+        }
+        .is-leaf {
+          color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.custom-tree {
+  .el-tree {
+    --node-icon-color: #9b9b9b;
+    --node-text-color: #070404;
+    --line-color: #eb3f3f;
+  }
+
+  /* 文本与左侧小图标 */
+  .tree-node-label {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    color: var(--node-text-color);
+    .tree-node-icon {
+      color: var(--node-icon-color);
+      margin-right: 6px;
+      font-size: 14px;
+    }
+
+    .text {
+      display: inline-block;
+      width: calc(100% - 44px);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .is-current {
+    .tree-node-icon {
+      fill: #fff;
+    }
+
+    > .el-tree-node__content {
+      .tree-line,
+      .tree-ring {
+        display: none;
+      }
+    }
+  }
+
+  /* 取消依赖内部类名：竖线通过节点内容内的 .tree-line 渲染 */
+  .tree-line {
+    pointer-events: none;
+    position: absolute;
+    bottom: -6px;
+    width: 0px;
+    border-left: 1px solid #e3e3e3;
+    height: 33px;
+  }
+  .tree-ring {
+    width: 6px;
+    height: 6px;
+    background-color: #e3e3e3;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    overflow: hidden;
+
+    position: absolute;
+    bottom: 3px;
+    left: -18px;
+  }
+  .tree-line-2 {
+    left: -12px;
+  }
+  .tree-line-3 {
+    left: -30px;
+  }
+  .tree-line-4 {
+    left: -48px;
+  }
+  .tree-line-5 {
+    left: -66px;
+  }
+  .tree-line-6 {
+    left: -84px;
+  }
+  .tree-line-7 {
+    left: -102px;
+  }
+}

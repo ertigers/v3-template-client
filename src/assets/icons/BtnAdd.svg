@@ -1,0 +1,7 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- white rounded square background -->
+  <rect x="2.5" y="2.5" width="15" height="15" rx="3" fill="#FFFFFF"/>
+  <!-- plus sign in theme red -->
+  <path d="M10 6.5V13.5" stroke="#E01D46" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M6.5 10H13.5" stroke="#E01D46" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

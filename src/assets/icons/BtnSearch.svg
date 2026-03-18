@@ -1,0 +1,6 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- white magnifier on transparent background (for red button background) -->
+  <circle cx="8.75" cy="8.75" r="6.25" stroke="#FFFFFF" stroke-width="1.6"/>
+  <path d="M11.2 6.2C10.7 5.7 9.9 5.4 8.75 5.4C7.6 5.4 6.8 5.7 6.3 6.2" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M13.6 13.6L16.9 16.9" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

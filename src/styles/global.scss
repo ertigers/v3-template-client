@@ -1,0 +1,519 @@
+.icon-color-primary {
+  fill: var(--el-color-primary);
+}
+
+// 定义黑红配色主题
+:root {
+  --theme-color-red: #e01d46;
+  --theme-color-red-hover: #f14949;
+  --theme-color-grey: #f0f0f0;
+  --theme-color-grey2: #e3e3e3;
+  --theme-color-grey-hover: #ffffff;
+  --theme-color-black: #000000;
+  --font-color-black: #070404;
+  --border-color-grey: #f0f0f0;
+  --switch-pill-bg: #f6f6f6;
+  --switch-pill-active: #e01d46;
+  --switch-pill-text: #7a7a7a;
+  --screen-scale: 1;
+  --screen-scale-s: 1;
+  --screen-scale-l: 1;
+  --screen-scale-test: 0.8;
+}
+
+.global-screen-scale {
+  zoom: var(--screen-scale, 1);
+}
+.global-screen-scale-s {
+  zoom: var(--screen-scale-s, 1);
+}
+.global-screen-scale-l {
+  zoom: var(--screen-scale-l, 1);
+}
+.global-screen-scale-test {
+  zoom: var(--screen-scale-test, 1);
+}
+
+@supports not (zoom: 1) {
+  .global-screen-scale {
+    transform: scale(var(--screen-scale, 1));
+    transform-origin: top left;
+    will-change: transform;
+  }
+  .global-screen-scale-s {
+    transform: scale(var(--screen-scale-s, 1));
+    transform-origin: top left;
+    will-change: transform;
+  }
+  .global-screen-scale-l {
+    transform: scale(var(--screen-scale-l, 1));
+    transform-origin: top left;
+    will-change: transform;
+  }
+}
+
+// 列表展示页面的常规css
+.custom-table-wrap {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 16px;
+}
+.table-header-tools {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+// 自定义的element的样式,  标记custom-element-css的类的所有的css样式都写在这里
+.custom-element-css {
+  // 表单操作按钮
+  .form-actions {
+    position: absolute;
+    bottom: -60px;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+
+    .cancel-btn {
+      min-width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      background: var(--theme-color-grey);
+      border: 1px solid transparent;
+      color: var(--font-color-black);
+      font-weight: 500;
+      font-size: 14px;
+
+      &:hover {
+        background: var(--theme-color-grey-hover);
+        border-color: var(--theme-color-red-hover);
+      }
+    }
+
+    .submit-btn {
+      min-width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      background: var(--theme-color-red);
+      border-color: var(--theme-color-red);
+      color: white;
+      font-weight: 500;
+      font-size: 14px;
+
+      &:hover {
+        background: var(--theme-color-red-hover);
+        border-color: var(--theme-color-red-hover);
+      }
+    }
+  }
+  // 差异就是一个在里面 一个定位到外面
+  .form-actions2 {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+
+    .cancel-btn {
+      min-width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      background: var(--theme-color-grey2);
+      border: 1px solid transparent;
+      color: var(--font-color-black);
+      font-weight: 500;
+      font-size: 14px;
+
+      &:hover {
+        background: var(--theme-color-grey-hover);
+        border-color: var(--theme-color-red-hover);
+      }
+    }
+
+    .submit-btn {
+      min-width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      background: var(--theme-color-red);
+      border-color: var(--theme-color-red);
+      color: white;
+      font-weight: 500;
+      font-size: 14px;
+
+      &:hover {
+        background: var(--theme-color-red-hover);
+        border-color: var(--theme-color-red-hover);
+      }
+    }
+  }
+
+  // 原生el组件的样式调整
+  .el-form-item {
+    margin-bottom: 24px;
+
+    .el-form-item__label {
+      font-size: 13px;
+      color: var(--font-color-black);
+      font-weight: 400;
+    }
+    // 表单校验失败时的样式
+    &.is-error {
+      .el-input__wrapper,
+      .el-select__wrapper {
+        border-color: var(--theme-color-red) !important;
+      }
+    }
+  }
+  .el-button {
+    height: 40px;
+    width: 100px;
+    --el-border-radius-base: 40px;
+  }
+  .el-input {
+    --el-input-height: 40px;
+    --el-input-border-radius: 40px;
+  }
+  .el-textarea__inner {
+    --el-input-border-radius: 16px;
+  }
+  .el-select {
+    --el-border-radius-base: 40px;
+    .el-select__wrapper {
+      min-height: 40px;
+    }
+  }
+  // 时间选择器
+  .el-range-editor.el-input__wrapper {
+    height: 40px;
+    border-radius: 40px;
+  }
+
+  .el-date-editor {
+    .el-input__wrapper {
+      height: 38px !important;
+    }
+  }
+  .el-input-group__prepend {
+    --el-fill-color-light: #ffffff;
+  }
+}
+
+// 自定义弹窗的css样式
+.custom-dialog-element-css {
+  border-radius: 20px !important;
+  .el-form-item {
+    .el-form-item__label {
+      font-size: 13px;
+      color: var(--font-color-black);
+      font-weight: 400;
+    }
+    // 输入框
+    .el-input,
+    .el-select {
+      width: 100%;
+      height: 100%;
+
+      .el-input__wrapper,
+      .el-select__wrapper {
+        border-radius: 40px;
+        border: 1px solid #e0e0e0;
+        box-shadow: none;
+        min-height: 40px;
+
+        &:hover {
+          border-color: #ccc;
+        }
+      }
+    }
+
+    // 表单校验失败时的样式
+    &.is-error {
+      .el-input__wrapper,
+      .el-select__wrapper {
+        border-color: var(--theme-color-red) !important;
+        box-shadow: 0 0 0 2px rgba(224, 29, 70, 0.1) !important;
+      }
+    }
+  }
+
+  .el-dialog__header .el-dialog__title {
+    font-size: 18px;
+    color: #000000;
+    font-weight: 500;
+  }
+  .el-dialog__footer {
+    border-top: 1px solid var(--border-color-grey);
+
+    .cancel-btn {
+      min-width: 120px;
+      height: 40px;
+      border-radius: 20px;
+      background: var(--theme-color-grey);
+      border: 1px solid transparent;
+      color: var(--font-color-black);
+      font-weight: 500;
+      font-size: 14px;
+
+      &:hover {
+        background: var(--theme-color-grey-hover);
+        border-color: var(--theme-color-red-hover);
+      }
+    }
+
+    .submit-btn {
+      min-width: 120px;
+      height: 36px;
+      border-radius: 20px;
+      background: var(--theme-color-red);
+      border-color: var(--theme-color-red);
+      color: white;
+      font-weight: 500;
+      font-size: 14px;
+
+      &:hover {
+        background: var(--theme-color-red-hover);
+        border-color: var(--theme-color-red-hover);
+      }
+    }
+  }
+}
+
+// 定制的胶囊切换（div版，贴合设计：左选中红边，右未选中灰边）
+.capsule-switch {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid transparent; // 外框由左右两段边框视觉呈现
+
+  .capsule-item {
+    min-width: 64px;
+    height: 37px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    background: #fff;
+    color: #666;
+    transition: color 0.2s ease;
+
+    &.center {
+      border: 1px solid #e5e5e5;
+    }
+
+    &.left {
+      border: 1px solid #e5e5e5;
+      border-top-left-radius: 999px;
+      border-bottom-left-radius: 999px;
+      border-right: none;
+    }
+
+    &.right {
+      border: 1px solid #e5e5e5;
+      border-top-right-radius: 999px;
+      border-bottom-right-radius: 999px;
+      border-left: none;
+    }
+
+    &.is-active {
+      color: var(--theme-color-red);
+      font-weight: 600;
+      border: 1px solid var(--theme-color-red) !important;
+    }
+
+    &:not(.is-active):hover {
+      color: var(--theme-color-red);
+    }
+  }
+}
+
+// 定制的时间选择器组件样式  快捷时间前后切换
+.custom-date-picker {
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px;
+  height: 31px;
+  border-radius: 28px;
+  background: #ffffff;
+  border: 1px solid #e6e8eb;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+
+  .el-date-editor.el-input {
+    width: auto;
+    .el-input__wrapper {
+      border: none;
+      box-shadow: none;
+      background: transparent;
+      padding: 0 6px;
+      min-height: 32px;
+    }
+    .el-input__prefix {
+      color: #9aa0a6;
+      margin-right: 6px;
+    }
+    .el-input__inner {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #111;
+      width: 60px;
+      letter-spacing: 0.5px;
+    }
+    .el-input__suffix {
+      display: none;
+    }
+  }
+
+  .nav-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: #7e8286;
+    cursor: pointer;
+    transition:
+      color 0.15s ease-in-out,
+      background 0.15s ease-in-out;
+
+    &:hover {
+      color: #1f2329;
+      background: #f6f7f8;
+    }
+
+    &.is-disabled,
+    &:disabled {
+      color: #c8cdd3;
+      cursor: not-allowed;
+      background: transparent;
+      pointer-events: none;
+    }
+  }
+}
+
+.custom-checkbox-group {
+  .el-checkbox__input {
+    position: relative;
+
+    .el-checkbox__inner {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #e0e0e0;
+      background-color: transparent;
+      transition: all 0.3s ease;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        width: 8px;
+        height: 8px;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+    }
+
+    &.is-checked {
+      .el-checkbox__inner {
+        background-color: var(--theme-color-red);
+        border-color: var(--theme-color-red);
+
+        &::after {
+          opacity: 1;
+        }
+      }
+    }
+
+    &:hover {
+      .el-checkbox__inner {
+        border-color: var(--theme-color-red);
+      }
+    }
+  }
+
+  .el-checkbox__label {
+    font-size: 13px;
+    color: var(--font-color-black);
+    line-height: 1.5;
+  }
+}
+
+.custom-radio-group {
+  .el-radio__label {
+    font-size: 13px;
+    color: var(--font-color-black);
+    line-height: 1.5;
+  }
+}
+
+// H5 基础兼容样式：在最外层容器添加 .h5-compat 生效
+.h5-compat {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  text-size-adjust: 100%;
+  touch-action: manipulation;
+  color: #000;
+  background: #fff;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  a,
+  button,
+  input,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .safe-area {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+  }
+}
+
+// 设备状态cell的样式
+.status-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .text {
+    color: #070404;
+    font-weight: 500;
+  }
+}

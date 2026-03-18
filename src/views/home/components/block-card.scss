@@ -1,0 +1,48 @@
+.power-stat-card {
+  background-color: #fff;
+  display: flex;
+
+  .stat-section {
+    flex: 1;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    .title {
+      height: 30px;
+      font-size: 16px;
+      color: #070404;
+    }
+
+    .section-title {
+      font-size: 14px;
+      color: #aeaeae;
+    }
+    .section-title2 {
+      margin: 12px 0;
+    }
+
+    .power-data {
+      display: flex;
+      align-items: baseline;
+
+      .power-value {
+        font-size: 24px;
+        font-weight: 600;
+        color: #070404;
+        margin-right: 4px;
+      }
+
+      .power-unit {
+        font-size: 16px;
+        color: #070404;
+      }
+    }
+  }
+  .divider {
+    // width: 1px;
+    // background-color: #eee;
+    // margin: 16px 0;
+  }
+}
