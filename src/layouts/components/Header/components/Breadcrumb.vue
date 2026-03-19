@@ -4,13 +4,16 @@
       <transition-group name="breadcrumb">
         <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
           <div
-            class="el-breadcrumb__inner is-link"
-            :class="{ 'item-no-icon': !item.meta.icon }"
+            class="el-breadcrumb__inner"
+            :class="{ 'is-link': index !== breadcrumbList.length - 1, 'item-no-icon': !item.meta.icon }"
             @click="onBreadcrumbClick(item, index)"
           >
-            <el-icon v-if="item.meta.icon && globalStore.breadcrumbIcon" class="breadcrumb-icon">
-              <component :is="item.meta.icon"></component>
-            </el-icon>
+            <template v-if="item.meta.icon && globalStore.breadcrumbIcon">
+              <el-icon v-if="getElementIcon(item.meta.icon)" class="breadcrumb-icon">
+                <component :is="getElementIcon(item.meta.icon)"></component>
+              </el-icon>
+              <svg-icon v-else :name="item.meta.icon" :icon-style="{ width: '16px', height: '16px', marginRight: '6px' }" />
+            </template>
             <span class="breadcrumb-title">{{ $t(item.meta.title) }}</span>
           </div>
         </el-breadcrumb-item>
@@ -21,29 +24,25 @@
 
 <script setup>
 import { computed } from "vue";
-import { HOME_URL } from "@/config";
 import { useRoute, useRouter } from "vue-router";
+import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import { ArrowRight } from "@element-plus/icons-vue";
 import { useAuthStore } from "@/stores/modules/auth";
 import { useGlobalStore } from "@/stores/modules/global";
-import { useI18n } from "vue-i18n";
+import SvgIcon from "@/components/SvgIcon/index.vue";
 
-const i18n = useI18n();
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
 const globalStore = useGlobalStore();
 
 const breadcrumbList = computed(() => {
-  let breadcrumbData = authStore.breadcrumbListGet[route.matched[route.matched.length - 1].path] ?? [];
-  // 🙅‍♀️不需要首页面包屑可删除以下判断
-  if (breadcrumbData[0].path !== HOME_URL) {
-    breadcrumbData = [{ path: HOME_URL, meta: { icon: "HomeFilled", title: i18n.t("routers.home") } }, ...breadcrumbData];
-  }
-  return breadcrumbData;
+  const currentPath = route.matched[route.matched.length - 1]?.path || route.path;
+  return authStore.breadcrumbListGet[currentPath] ?? [];
 });
 
-// Click Breadcrumb
+const getElementIcon = iconName => ElementPlusIconsVue[iconName];
+
 const onBreadcrumbClick = (item, index) => {
   if (index !== breadcrumbList.value.length - 1) router.push(item.path);
 };
@@ -65,6 +64,7 @@ const onBreadcrumbClick = (item, index) => {
       }
       .el-breadcrumb__inner {
         display: inline-flex;
+        align-items: center;
         &.is-link {
           color: var(--el-header-text-color);
           &:hover {
@@ -82,7 +82,7 @@ const onBreadcrumbClick = (item, index) => {
       }
       &:last-child .el-breadcrumb__inner,
       &:last-child .el-breadcrumb__inner:hover {
-        color: var(--el-header-text-color-regular);
+        /* color: var(--el-header-text-color-regular); */
       }
       :deep(.el-breadcrumb__separator) {
         transform: translateY(-1px);
