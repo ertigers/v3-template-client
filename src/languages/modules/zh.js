@@ -159,52 +159,7 @@ export default {
     noPermissionMessage: "当前账号无任何菜单权限，请联系系统管理员！",
     timeout: "请求超时！请您稍后重试",
     NetworkError: "网络错误！请您稍后重试",
-    NoneFile: "文件不能为空",
-    dataOverview: "数据总览",
-    customerHome: "业主首页",
-    // 电站管理
-    stationList: "电站列表",
-    stationCreate: "创建电站",
-    stationDetail: "电站详情",
-    stationDetailSetting: "电站设置",
-    // 设备管理
-    deviceManagement: "设备管理",
-    deviceList: "设备列表",
-    deviceDetail: "设备详情",
-    warningList: "告警列表",
-    dataReport: "数据报表",
-    gridFileManagement: "并网文件管理",
-    warrantyManagement: "质保管理",
-    adminControl: "超管控制",
-    deviceUpgrade: "设备升级",
-    // SN管理
-    snManagement: "SN管理",
-    // 账号管理
-    accountManagement: "账号管理",
-    organizationManagement: "组织管理",
-    userManagement: "用户管理",
-    ownerManagement: "业主管理",
-    // 操作记录
-    operationRecord: "操作记录",
-    replacementRecord: "更换记录",
-    remoteControlHistory: "远程控制历史",
-    // 资源管理
-    resourceManagement: "资源管理",
-    // 其他功能页面
-    helpDocument: "帮助文档",
-    feedback: "意见反馈",
-    feedbackList: "反馈记录",
-    messageNotification: "消息通知",
-    messageNotificationAdd: "通知下发",
-    userInfo: "账号信息",
-    homeScreen: "首页大屏",
-
-    //public
-    WarrantyQuery: "质保查询",
-    WarrantyRegister: "保修注册",
-    PrivacyPolicy: "隐私政策",
-    Register: "创建账户",
-    ForgotPassword: "忘记密码"
+    NoneFile: "文件不能为空"
   },
   layouts: {
     tabs: {

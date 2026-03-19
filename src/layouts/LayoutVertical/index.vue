@@ -14,6 +14,7 @@
             :collapse="isCollapse"
             :unique-opened="accordion"
             :collapse-transition="false"
+            style="height: 100%"
           >
             <SubMenu :menu-list="menuList" />
           </el-menu>
@@ -53,4 +54,8 @@ const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu
 
 <style scoped lang="scss">
 @use "./index.scss" as *;
+
+:deep(.el-scrollbar__view) {
+  height: 100%;
+}
 </style>

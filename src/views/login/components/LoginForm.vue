@@ -34,7 +34,7 @@
         <el-switch v-model="rememberMe" size="small" active-color="#ff4d4f" @change="handleRememberChange" />
         <span class="remember-text">{{ $t("login.remember") }}</span>
       </div>
-      <el-link underline="never" @click="goForgotPassword" class="forgot-password">{{ $t("login.forgotPassword") }}</el-link>
+      <!-- <el-link underline="never" @click="goForgotPassword" class="forgot-password">{{ $t("login.forgotPassword") }}</el-link> -->
     </div>
 
     <!-- 登录按钮 -->
@@ -43,12 +43,6 @@
         {{ $t("login.title") }}
       </el-button>
     </el-form-item>
-
-    <!-- 注册和演示账号 -->
-    <div class="form-links">
-      <el-link type="info" underline="never" class="register-link" @click="goRegister">{{ $t("login.register") }}</el-link>
-      <el-link type="info" underline="never" class="demo-link" @click="goDemoAccount">{{ $t("login.demoAccount") }}</el-link>
-    </div>
   </el-form>
 </template>
 
@@ -119,40 +113,6 @@ const handleRememberChange = () => {
 
 const goForgotPassword = () => {
   router.push("/public/forgot-password");
-};
-
-const goRegister = async () => {
-  try {
-    await ElMessageBox.confirm(
-      `<div style="line-height: 1.6;">
-        <p style="margin: 0 0 15px 0; color: #666; font-size: 14px;">${$t("login.forgotPasswordTip1")}</p>
-        <p style="margin: 0 0 15px 0; color: #666; font-size: 14px;">${$t("login.forgotPasswordTip2")}</p>
-        <p style="margin: 0; color: #666; font-size: 14px;">${$t("login.forgotPasswordTip3")}</p>
-      </div>`,
-      $t("global.tips"),
-      {
-        confirmButtonText: $t("global.next"),
-        cancelButtonText: $t("global.cancel"),
-        dangerouslyUseHTMLString: true,
-        confirmButtonClass: "el-button--primary",
-        cancelButtonClass: "el-button--default",
-        customClass: "forgot-password-dialog",
-        customStyle: {
-          borderRadius: "16px",
-          minWidth: "480px"
-        }
-      }
-    );
-    // 只有点击"下一步"才会执行到这里
-    router.push("/public/register");
-  } catch (error) {
-    // 用户点击取消或关闭弹窗，不做任何操作
-    console.log("用户取消了忘记密码操作");
-  }
-};
-
-const goDemoAccount = () => {
-  // router.push("/public/demo-account");
 };
 
 // login

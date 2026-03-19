@@ -7,13 +7,58 @@
       "component": "/home/index",
       "meta": {
         "icon": "MenuChartPie",
-        "title": "routers.dataOverview",
+        "title": "首页",
         "isLink": "",
         "isHide": false,
         "isFull": false,
         "isAffix": true,
         "isKeepAlive": false
       }
+    },
+    {
+      "path": "/system-setting",
+      "name": "systemSetting",
+      "component": "/system-setting/index",
+      "redirect": "/system-setting/permission-management",
+      "meta": {
+        "icon": "MenuUserMange",
+        "title": "系统管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/system-setting/permission-management",
+          "name": "permissionManagement",
+          "component": "/access/permission-management/index",
+          "meta": {
+            "icon": "MenuUserMange",
+            "title": "权限管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system-setting/role-management",
+          "name": "roleManagement",
+          "component": "/access/role-management/index",
+          "meta": {
+            "icon": "MenuUser",
+            "title": "角色管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
     }
   ],
   "msg": "success"

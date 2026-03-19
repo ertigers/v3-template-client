@@ -11,48 +11,48 @@ import { useCommonStore } from "@/stores/modules/common";
 export const useAuthStore = defineStore({
   id: "envertech-auth",
   state: () => ({
-    // 鎸夐挳鏉冮檺鍒楄〃
+    // 按钮权限列表
     authButtonList: {},
-    // 鑿滃崟鏉冮檺鍒楄〃
+    // 菜单权限列表
     authMenuList: [],
-    // 鐢ㄦ埛鏉冮檺闆?
+    // 用户权限集
     userPermissions: [],
-    // 褰撳墠椤甸潰鐨?router name锛岀敤鏉ュ仛鎸夐挳鏉冮檺绛涢€?
+    // 当前页面的 router name，用来做按钮权限筛选
     routeName: "",
-    // 鏈娑堟伅鏁伴噺
+    // 未读消息数量
     redTipCount: {
       notice: 1,
       alarm: 0
     },
-    // 鏄惁鏄笟涓?
+    // 是否是业主
     isCustomer: false
   }),
   getters: {
-    // 鏄惁鏄笟涓?
+    // 是否是业主
     isCustomerGet: state => state.isCustomer,
-    // 鎸夐挳鏉冮檺鍒楄〃
+    // 按钮权限列表
     authButtonListGet: state => state.authButtonList,
-    // 鑿滃崟鏉冮檺鍒楄〃 ==> 杩欓噷鐨勮彍鍗曟病鏈夌粡杩囦换浣曞鐞?
+    // 菜单权限列表 ==> 这里的菜单没有经过任何处理
     authMenuListGet: state => state.authMenuList,
-    // 鐢ㄦ埛鏉冮檺闆?
+    // 用户权限集
     userPermissionsGet: state => state.userPermissions,
-    // 鑿滃崟鏉冮檺鍒楄〃 ==> 宸︿晶鑿滃崟鏍忔覆鏌擄紝闇€瑕佸墧闄?isHide == true
+    // 菜单权限列表 ==> 左侧菜单栏渲染，需要剔除 isHide == true
     showMenuListGet: state => getShowMenuList(state.authMenuList),
-    // 鑿滃崟鏉冮檺鍒楄〃 ==> 鎵佸钩鍖栦箣鍚庣殑涓€缁存暟缁勮彍鍗曪紝涓昏鐢ㄦ潵娣诲姞鍔ㄦ€佽矾鐢?
+    // 菜单权限列表 ==> 扁平化之后的一维数组菜单，主要用来添加动态路由
     flatMenuListGet: state => getFlatMenuList(state.authMenuList),
-    // 閫掑綊澶勭悊鍚庣殑鎵€鏈夐潰鍖呭睉瀵艰埅鍒楄〃
+    // 递归处理后的所有面包屑导航列表
     breadcrumbListGet: state => getAllBreadcrumbList(state.authMenuList),
-    // 鏈娑堟伅鏁伴噺
+    // 未读消息数量
     redTipCountGet: state => state.redTipCount
   },
   actions: {
-    // 璁剧疆鏈娑堟伅鏁伴噺
+    // 设置未读消息数量
     async setRedTipCount() {
       const { data } = await authApi.getUnreadMessage();
       this.redTipCount.notice = data.notice || 0;
       this.redTipCount.alarm = data.alarm || 0;
     },
-    // 娴嬭瘯鐢ㄧ殑*---鍏ㄩ儴宸茶
+    // 测试用的*---全部已读
     setRedTipCount2() {
       this.redTipCount.notice = 0;
       this.redTipCount.alarm = 0;
@@ -70,34 +70,34 @@ export const useAuthStore = defineStore({
       console.log("userInfo", userInfo);
 
       const roles = userInfo.roles || [];
-      // 鏍规嵁瑙掕壊鏍囪鏄惁涓轰笟涓伙紝骞跺姩鎬佽缃椤靛湴鍧€
+      // 根据角色标记是否为业主，并动态设置首页地址
       if (roles.includes("terminal")) {
-        this.isCustomer = false;
-        setHomeUrl("/home/index");
+        this.isCustomer = true;
+        setHomeUrl("/home/customer");
       } else {
         this.isCustomer = false;
         setHomeUrl("/home/index");
       }
       console.log("isCustomer", this.isCustomer);
 
-      // 鎶妘serInfo瀛樺湪stores/modules/user.js涓?
+      // 把userInfo存在stores/modules/user.js中
       useUserStore().setUserInfo(userInfo);
 
-      // 澶勭悊鐢ㄦ埛鏉冮檺闆?
+      // 处理用户权限集
       let userPermissions = userInfo.permissions || [];
 
-      // 瀛樺偍鐢ㄦ埛鏉冮檺闆?
+      // 存储用户权限集
       this.userPermissions = userPermissions;
       console.log("userPermissions", userPermissions);
 
-      // 浣跨敤鏉冮檺闆嗚繃婊よ彍鍗?
+      // 使用权限集过滤菜单
       const authMenuFilterList = filterAsyncRoutes(authMenuList, userPermissions);
       console.log("authMenuFilterList", authMenuFilterList);
       this.authMenuList = authMenuFilterList;
 
-      console.log("--------------------------------鍒濆鍖栧叏灞€鏁版嵁--------");
-      // 杩欓噷鏈€濂藉湪鍒囨崲鍥介檯鍖栬瑷€鐨勬椂鍊欎篃璋冪敤涓€涓?
-      // 浣跨敤寮傛鍔犺浇鐨勬柟寮?濡傛灉鏈夐渶瑕佸悓姝? 浣跨敤await绛夊緟
+      console.log("--------------------------------初始化全局数据--------");
+      // 这里最好在切换国际化语言的时候也调用一下
+      // 使用异步加载的方式,如果有需要同步  使用await等待
       const commonStore = useCommonStore();
       commonStore.getOrgType();
       commonStore.getDeviceTypeList();
